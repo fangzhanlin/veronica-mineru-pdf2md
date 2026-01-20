@@ -22,6 +22,7 @@
 import argparse
 import asyncio
 import json
+import re
 import shutil
 import sys
 import time
@@ -36,6 +37,17 @@ from mineru_api_base import (
     TaskResult,
     logger,
 )
+
+
+def sanitize_filename(name: str) -> str:
+    """
+    清理文件名，使其符合Windows系统的路径要求
+    """
+    # 替换Windows不支持的字符: \ / : * ? " < > |
+    invalid_chars = r'[\\/:*?"<>|]'
+    clean_name = re.sub(invalid_chars, '_', name)
+    # 移除首尾空格和末尾的点
+    return clean_name.strip().rstrip('.')
 
 
 class PDFBatchProcessor(BaseBatchProcessor):
@@ -111,16 +123,20 @@ class PDFBatchProcessor(BaseBatchProcessor):
                 try:
                     # 计算相对路径
                     relative_path = pdf_path.relative_to(self.input_dir)
-                    subfolder = relative_path.parent
-                    filename = pdf_path.stem
+                    
+                    # 清理路径中的每一部分（处理非法字符和结尾空格/点）
+                    # 比如 'EJIS /file .pdf' -> 'EJIS/file'
+                    clean_parts = [sanitize_filename(p) for p in relative_path.parent.parts]
+                    clean_subfolder = Path(*clean_parts) if clean_parts else Path('.')
+                    filename = sanitize_filename(pdf_path.stem)
                     
                     # 计算输出目录: outputs_api/子文件夹/文件名/
-                    file_output_dir = self.output_dir / subfolder / filename
+                    file_output_dir = self.output_dir / clean_subfolder / filename
                     
                     files.append({
                         'path': pdf_path,
                         'output_dir': file_output_dir,
-                        'subfolder': subfolder,
+                        'subfolder': clean_subfolder,
                         'filename': filename,
                     })
                 except Exception as e:

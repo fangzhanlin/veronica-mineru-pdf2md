@@ -16,6 +16,7 @@ import requests
 import zipfile
 import logging
 import os
+import re
 import time
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -172,6 +173,14 @@ class MinerUAPIClient:
             "Authorization": f"Bearer {self.api_key}",
             "Accept": "application/json",
         }
+
+    def _sanitize_filename(self, filename: str) -> str:
+        """清洗文件名，移除Windows不兼容字符和末尾空格"""
+        # 替换Windows不支持的字符: \ / : * ? " < > |
+        invalid_chars = r'[\\/:*?"<>|]'
+        clean_name = re.sub(invalid_chars, '_', filename)
+        # 移除首尾空格和末尾的点
+        return clean_name.strip().rstrip('.')
     
     # ==================== 异步API方法 ====================
     
@@ -455,11 +464,12 @@ class MinerUAPIClient:
         output_path.mkdir(parents=True, exist_ok=True)
         
         # 从文件名提取目录名（去掉扩展名）
-        file_stem = Path(task_result.file_name).stem
-        extract_dir = output_path / file_stem
+        # 使用sanitize_filename处理文件名，避免由于文件名带空格导致路径错误
+        clean_name = self._sanitize_filename(Path(task_result.file_name).stem)
+        extract_dir = output_path / clean_name
         extract_dir.mkdir(parents=True, exist_ok=True)
         
-        zip_path = output_path / f"{file_stem}.zip"
+        zip_path = output_path / f"{clean_name}.zip"
         
         logger.info(f"下载文件: {task_result.file_name}")
         
@@ -708,11 +718,11 @@ class MinerUAPIClient:
         output_path = Path(output_dir)
         output_path.mkdir(parents=True, exist_ok=True)
         
-        file_stem = Path(task_result.file_name).stem
-        extract_dir = output_path / file_stem
+        clean_name = self._sanitize_filename(Path(task_result.file_name).stem)
+        extract_dir = output_path / clean_name
         extract_dir.mkdir(parents=True, exist_ok=True)
         
-        zip_path = output_path / f"{file_stem}.zip"
+        zip_path = output_path / f"{clean_name}.zip"
         
         logger.info(f"下载文件: {task_result.file_name}")
         
