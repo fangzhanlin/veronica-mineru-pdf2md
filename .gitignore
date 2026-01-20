@@ -1,7 +1,8 @@
-bak_cpu/
+bak/
 pdfs/
 outputs_api/
 *.env
+*.csv
 *.txt
 *.log
 # Python-generated files
