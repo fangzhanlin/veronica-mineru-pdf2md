@@ -283,7 +283,7 @@ class MyProcessor(BaseBatchProcessor):
 
 ```json
 {
-    "language": "ch",           // 文档语言，可通过 --language 修改
+    "language": "en",           // 文档语言，可通过 --language 修改
     "files": [
         {
             "name": "文件名.pdf",
