@@ -26,11 +26,12 @@ from enum import Enum
 
 
 # 配置日志
+log_file = Path(__file__).parent / 'mineru_api.log'
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('mineru_api.log', encoding='utf-8'),
+        logging.FileHandler(str(log_file), encoding='utf-8'),
         logging.StreamHandler()
     ]
 )

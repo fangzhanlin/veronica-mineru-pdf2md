@@ -57,13 +57,13 @@ uv sync
 
 ```bash
 # 显示统计信息，注意重复警告（不执行处理）
-uv run batch_convert_api.py --stats
+uv run mineru_pdf2md/batch_convert_api.py --stats
 
 # 使用异步设置处理所有PDF
-uv run batch_convert_api.py --async --batch-size 3 --delay 5
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3 --delay 5
 
 # 查看帮助
-uv run batch_convert_api.py --help
+uv run mineru_pdf2md/batch_convert_api.py --help
 ```
 
 ### 命令行参数详解
@@ -106,10 +106,10 @@ uv run batch_convert_api.py --help
 
 ```bash
 # 处理英文文档
-uv run batch_convert_api.py --language en
+uv run mineru_pdf2md/batch_convert_api.py --language en
 
 # 处理日文文档
-uv run batch_convert_api.py --language japan
+uv run mineru_pdf2md/batch_convert_api.py --language japan
 ```
 
 #### `--no-ocr` 禁用OCR
@@ -119,7 +119,7 @@ uv run batch_convert_api.py --language japan
 
 ```bash
 # 对于纯文本PDF，禁用OCR可以加快处理速度
-uv run batch_convert_api.py --no-ocr
+uv run mineru_pdf2md/batch_convert_api.py --no-ocr
 ```
 
 #### `--no-skip` 强制重新处理
@@ -128,7 +128,7 @@ uv run batch_convert_api.py --no-ocr
 
 ```bash
 # 重新处理所有文件（覆盖已有结果）
-uv run batch_convert_api.py --no-skip
+uv run mineru_pdf2md/batch_convert_api.py --no-skip
 ```
 
 #### `--async` 异步模式 vs 同步模式
@@ -142,13 +142,13 @@ uv run batch_convert_api.py --no-skip
 
 ```bash
 # 使用异步模式，逐个处理（默认）
-uv run batch_convert_api.py --async
+uv run mineru_pdf2md/batch_convert_api.py --async
 
 # 使用异步模式，同时处理3个文件
-uv run batch_convert_api.py --async --batch-size 3
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3
 
 # 使用异步模式，同时处理5个文件，批次间隔2秒
-uv run batch_convert_api.py --async --batch-size 5 --delay 2
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 5 --delay 2
 ```
 
 #### `--batch-size` 并发数量
@@ -157,10 +157,10 @@ uv run batch_convert_api.py --async --batch-size 5 --delay 2
 
 ```bash
 # 同时处理3个文件
-uv run batch_convert_api.py --async --batch-size 3
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3
 
 # 同时处理5个文件
-uv run batch_convert_api.py --async --batch-size 5
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 5
 ```
 
 ⚠️ **注意**：
@@ -173,10 +173,10 @@ uv run batch_convert_api.py --async --batch-size 5
 
 ```bash
 # 设置2秒间隔
-uv run batch_convert_api.py --async --batch-size 3 --delay 2.0
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3 --delay 2.0
 
 # 不使用间隔（可能触发速率限制）
-uv run batch_convert_api.py --async --batch-size 3 --delay 0
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3 --delay 0
 ```
 
 #### `--max-retries` 和 `--retry-interval`
@@ -190,29 +190,29 @@ uv run batch_convert_api.py --async --batch-size 3 --delay 0
 
 ```bash
 # 对于大文件，增加等待时间
-uv run batch_convert_api.py --max-retries 360 --retry-interval 15
+uv run mineru_pdf2md/batch_convert_api.py --max-retries 360 --retry-interval 15
 ```
 
 ### 使用示例
 
 ```bash
 # 1. 先查看有多少文件待处理
-uv run batch_convert_api.py --stats
+uv run mineru_pdf2md/batch_convert_api.py --stats
 
 # 2. 处理英文学术论文（推荐设置）
-uv run batch_convert_api.py --language en
+uv run mineru_pdf2md/batch_convert_api.py --language en
 
 # 3. 快速处理纯文本PDF
-uv run batch_convert_api.py --no-ocr --delay 0.5
+uv run mineru_pdf2md/batch_convert_api.py --no-ocr --delay 0.5
 
 # 4. 处理指定目录
-uv run batch_convert_api.py -i my_pdfs -o my_outputs
+uv run mineru_pdf2md/batch_convert_api.py -i my_pdfs -o my_outputs
 
 # 5. 重新处理所有文件
-uv run batch_convert_api.py --no-skip
+uv run mineru_pdf2md/batch_convert_api.py --no-skip
 
 # 6. 完整参数示例
-uv run batch_convert_api.py \
+uv run mineru_pdf2md/batch_convert_api.py \
     --input-dir pdfs \
     --output-dir outputs_api \
     --language en \
@@ -356,7 +356,7 @@ def is_processed(self, file_info):
 
 ```bash
 # 同时处理3个文件，批次间隔1秒
-uv run batch_convert_api.py --async --batch-size 3 --delay 1
+uv run mineru_pdf2md/batch_convert_api.py --async --batch-size 3 --delay 1
 ```
 
 **工作原理：**
@@ -381,7 +381,7 @@ uv run batch_convert_api.py --async --batch-size 3 --delay 1
 
 ```bash
 # 修改语言、禁用OCR、不跳过已处理文件
-uv run batch_convert_api.py --language en --no-ocr --no-skip
+uv run mineru_pdf2md/batch_convert_api.py --language en --no-ocr --no-skip
 ```
 
 ### 方法2：修改代码默认值
