@@ -2,7 +2,7 @@
 
 ## 快速上手
 
-```
+```powershell
 uv run .\match_pdfs_title_doi\match_records.py --pdfs-dir ./origin_pdfs --source mongodb --mongo-uri "mongodb://localhost:27017" --mongo-db top-is-papers --mongo-collection papers --recursive --copy-pdfs --copy-dir ./pdfs --clean
 ```
 

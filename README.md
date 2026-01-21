@@ -16,9 +16,9 @@
      ```
 
 2. **文件准备**:
-   - **PDF**: 将 PDF 文件按期刊分类放入 `pdfs/` 文件夹下的对应子目录（例如 `pdfs/MISQ/`）。
-   - **CSV**: 将 Scopus 导出的 CSV 文件放入 `scopus_csv_records/`。
-   - **Token**: 在项目根目录创建 `token.txt` 文件，并填入你的 [MinerU API Key](https://mineru.net/apiManage)。或者使用环境变量。
+   - **PDF**: 将 PDF 文件放入 `oringin_pdfs/` .
+   - **CSV/MongoDB**: 将 Scopus 导出的 CSV 文件放入 `scopus_csv_records/`/准备数据库
+   - **Mineru_Token**: 使用环境变量/在项目根目录创建 `token.txt` 文件，并填入你的 [MinerU API Key](https://mineru.net/apiManage).
 
 ## 快速开始
 
@@ -26,7 +26,9 @@
 用于检查现有的 PDF 是否与 Scopus 记录匹配。
 
 ```powershell
-uv run match_pdfs_title_doi/match_records.py
+```
+uv run .\match_pdfs_title_doi\match_records.py --pdfs-dir ./origin_pdfs --source mongodb --mongo-uri "mongodb://localhost:27017" --mongo-db top-is-papers --mongo-collection papers --recursive --copy-pdfs --copy-dir ./pdfs --clean
+```
 ```
 > 更多匹配规则、参数说明及结果解读，请参考 [MATCH_README.md](match_pdfs_title_doi/MATCH_README.md)。
 
