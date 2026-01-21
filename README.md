@@ -2,7 +2,7 @@
 
 本项目是一个用于管理学术文献 PDF 并将其批量转换为 Markdown 的工具集。主要包含两个功能模块：
 
-1. **文献匹配 (`match_pdfs_title_doi`)**: 将本地 PDF 文件与 Scopus CSV 索引记录进行匹配，建立关联。
+1. **文献匹配 (`match_pdfs_title_doi`)**: 将本地 PDF 文件与 MongoDB / Scopus CSV 索引记录进行匹配，建立关联。
 2. **格式转换 (`mineru_pdf2md`)**: 使用 MinerU API 高效地将 PDF 批量转换为 Markdown 格式。
 
 ## 准备工作
