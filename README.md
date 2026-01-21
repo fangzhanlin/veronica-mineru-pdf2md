@@ -17,7 +17,7 @@
 
 2. **文件准备**:
    - **PDF**: 将 PDF 文件放入 `oringin_pdfs/` .
-   - **CSV/MongoDB**: 将 Scopus 导出的 CSV 文件放入 `scopus_csv_records/`/准备数据库
+   - **MongoDB**: 准备数据库 (CSV将 Scopus 导出的 CSV 文件放入 `scopus_csv_records/`)
    - **Mineru_Token**: 使用环境变量/在项目根目录创建 `token.txt` 文件，并填入你的 [MinerU API Key](https://mineru.net/apiManage).
 
 ## 快速开始
