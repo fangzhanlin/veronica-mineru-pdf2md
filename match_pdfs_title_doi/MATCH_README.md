@@ -111,7 +111,9 @@ uv run match_pdfs_title_doi/match_records.py `
     --source mongodb `
     --mongo-uri "mongodb://localhost:27017" `
     --mongo-db literature `
-    --mongo-collection papers
+    --mongo-collection papers `
+    --recursive `
+    --clean
 ```
 
 ### 复制匹配的 PDF
@@ -122,7 +124,9 @@ uv run match_pdfs_title_doi/match_records.py `
      --pdfs-dir ./origin_pdfs `
     --csv-file ./data.csv `
     --copy-pdfs `
-    --copy-dir ./pdfs
+    --copy-dir ./pdfs `
+    --recursive `
+    --clean
 
 # MongoDB 模式 - 复制并以 uuid 重命名
 uv run match_pdfs_title_doi/match_records.py `
@@ -132,7 +136,9 @@ uv run match_pdfs_title_doi/match_records.py `
     --mongo-db literature `
     --mongo-collection papers `
     --copy-pdfs `
-    --copy-dir ./pdfs
+    --copy-dir ./pdfs `
+    --recursive `
+    --clean
 ```
 
 ### 命令行参数
