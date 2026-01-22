@@ -102,11 +102,11 @@ uv run match_pdfs_title_doi/match_records.py \
 uv add pymongo
 
 # 使用 MongoDB 数据源
-uv run match_pdfs_title_doi/match_records.py \
-    --pdfs-dir ./pdfs \
-    --source mongodb \
-    --mongo-uri "mongodb://localhost:27017" \
-    --mongo-db literature \
+uv run match_pdfs_title_doi/match_records.py `
+    --pdfs-dir ./pdfs `
+    --source mongodb `
+    --mongo-uri "mongodb://localhost:27017" `
+    --mongo-db literature `
     --mongo-collection papers
 ```
 
