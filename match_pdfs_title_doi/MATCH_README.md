@@ -85,14 +85,18 @@ match_pdfs_title_doi/
 & .venv\Scripts\Activate.ps1
 
 # 使用单个 CSV 文件
-uv run match_pdfs_title_doi/match_records.py \
-    --pdfs-dir ./pdfs \
-    --csv-file ./scopus_csv_records/scopus_dsr.csv
+uv run match_pdfs_title_doi/match_records.py `
+     --pdfs-dir ./origin_pdfs `
+     --csv-file ./scopus_csv_records/scopus_dsr.csv `
+    --recursive `
+    --clean
 
 # 使用 CSV 目录（匹配所有 CSV 文件）
-uv run match_pdfs_title_doi/match_records.py \
-    --pdfs-dir ./pdfs \
-    --csv-dir ./scopus_csv_records
+uv run match_pdfs_title_doi/match_records.py `
+    --pdfs-dir ./origin_pdfs `
+    --csv-dir ./scopus_csv_records `
+    --recursive `
+    --clean
 ```
 
 ### 使用 MongoDB 数据源
@@ -103,7 +107,7 @@ uv add pymongo
 
 # 使用 MongoDB 数据源
 uv run match_pdfs_title_doi/match_records.py `
-    --pdfs-dir ./pdfs `
+     --pdfs-dir ./origin_pdfs `
     --source mongodb `
     --mongo-uri "mongodb://localhost:27017" `
     --mongo-db literature `
@@ -114,21 +118,21 @@ uv run match_pdfs_title_doi/match_records.py `
 
 ```powershell
 # CSV 模式 - 复制匹配的 PDF（保持原文件名）
-uv run match_pdfs_title_doi/match_records.py \
-    --pdfs-dir ./pdfs \
-    --csv-file ./data.csv \
-    --copy-pdfs \
-    --copy-dir ./matched_pdfs
+uv run match_pdfs_title_doi/match_records.py `
+     --pdfs-dir ./origin_pdfs `
+    --csv-file ./data.csv `
+    --copy-pdfs `
+    --copy-dir ./pdfs
 
 # MongoDB 模式 - 复制并以 uuid 重命名
-uv run match_pdfs_title_doi/match_records.py \
-    --pdfs-dir ./pdfs \
-    --source mongodb \
-    --mongo-uri "mongodb://localhost:27017" \
-    --mongo-db literature \
-    --mongo-collection papers \
-    --copy-pdfs \
-    --copy-dir ./matched_pdfs
+uv run match_pdfs_title_doi/match_records.py `
+     --pdfs-dir ./origin_pdfs `
+    --source mongodb `
+    --mongo-uri "mongodb://localhost:27017" `
+    --mongo-db literature `
+    --mongo-collection papers `
+    --copy-pdfs `
+    --copy-dir ./pdfs
 ```
 
 ### 命令行参数
